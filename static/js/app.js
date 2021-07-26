@@ -71,6 +71,8 @@ function init() {
     var defaultSample = samples[0];
     console.log(defaultSample)
 
+    renderChart(defaultSample);
+
   });
 
   
