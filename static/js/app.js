@@ -2,6 +2,7 @@ const url = "data/samples.json";
 
 function optionChanged(updatedSample) {
   renderChart(updatedSample);
+  renderMeta(updatedSample);
 }
 
 function renderMeta(updatedSample) {
@@ -88,7 +89,7 @@ function init() {
     console.log(defaultSample)
 
     renderChart(defaultSample);
-    renderMeta(defaultSample;
+    renderMeta(defaultSample);
   });
 
   
