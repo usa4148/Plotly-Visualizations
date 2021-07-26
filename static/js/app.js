@@ -12,9 +12,11 @@ function renderMeta(updatedSample) {
     console.log(filteredMeta);
     var chosenMeta = filteredMeta[0];
     console.log(chosenMeta);
-    var databox = d3.select("#sample-metadata");
-	 
-    
+    var output = d3.select("#sample-metadata");
+    output.html("");
+    Object.entries(chosenMeta).forEach(([key, value]) => {
+      output.append("li").text(`${key}: ${value}`);
+    });
   });
 }
 
