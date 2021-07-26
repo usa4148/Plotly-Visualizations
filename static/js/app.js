@@ -5,13 +5,25 @@ function optionChanged(updatedSample) {
 }
 
 function renderChart(updatedSample) {
+  // Pull samples data out of sample.json
+  // Filter for our option
+  d3.json(url).then((data) => {
+    var setts = data.samples;
+    var filteredSets = setts.filter(i => (i.id == updatedSample));
+    var chosenOne = filteredsets[0];
+    var xvalues = chosenOne.sample_values;
+    var yvalues = chosenOne.otu_ids;
+    var otulabels = chosenONe.otu_labels; 
+      
+  }
+
    var trace1 = {
     x: datavalue,
     y: otu_ids,
     text: label,
     type: "bar",
     orientation: "h"
-  });
+  }
 
   // data
 
@@ -19,14 +31,17 @@ function renderChart(updatedSample) {
 
   // Apply the group bar mode to the layout
   var layout = { 
-    title: "Greek gods search results",
+    title: "Top 10 Bacteria Cultures Found",
     margin: {
       l: 100,
       r: 100,
       t: 100,
       b: 100
     }
-  };
+  }
+
+  // Render the plot to the div tag with id "bar"
+  Plotly.newPlot("bar", chartData, layout);
 
 }
 

@@ -4,9 +4,31 @@ function optionChanged(updatedSample) {
   renderChart(updatedSample);
 }
 
-// function renderChart(updatedSample) {
+function renderChart(updatedSample) {
+   var trace1 = {
+    x: datavalue,
+    y: otu_ids,
+    text: label,
+    type: "bar",
+    orientation: "h"
+  });
 
-//}
+  // data
+
+  var chartData = [trace1];
+
+  // Apply the group bar mode to the layout
+  var layout = { 
+    title: "Greek gods search results",
+    margin: {
+      l: 100,
+      r: 100,
+      t: 100,
+      b: 100
+    }
+  };
+
+}
 
 function init() {
 
