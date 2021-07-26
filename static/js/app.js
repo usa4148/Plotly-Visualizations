@@ -54,7 +54,8 @@ function renderChart(updatedSample) {
     y: text,
     text: otulabels,
     type: "bar",
-    orientation: "h"
+    orientation: "h",
+    marker: {color: "chartreuse"}
   };
 
   // data
