@@ -10,14 +10,18 @@ function renderChart(updatedSample) {
   d3.json(url).then((data) => {
     var setts = data.samples;
     var filteredSets = setts.filter(i => (i.id == updatedSample));
-    var chosenOne = filteredsets[0];
+    var chosenOne = filteredSets[0];
     var xvalues = chosenOne.sample_values;
     var yvalues = chosenOne.otu_ids;
-    var otulabels = chosenONe.otu_labels; 
+    var otulabels = chosenOne.otu_labels; 
       
   }
 
-   var trace1 = {
+  xvalues = xvalues.slice(0,10);
+  yvalues = yvalues.slice(0,10);
+  otulabels = otulabels.slice(0,10);	  
+
+  var trace1 = {
     x: datavalue,
     y: otu_ids,
     text: label,
