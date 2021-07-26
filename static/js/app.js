@@ -27,9 +27,9 @@ function renderChart(updatedSample) {
   otulabels = otulabels.slice(0,10);	  
 
   var trace1 = {
-    x: datavalue,
-    y: otu_ids,
-    text: label,
+    x: xdata,
+    y: ydata,
+    text: otulabels,
     type: "bar",
     orientation: "h"
   };
