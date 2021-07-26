@@ -13,11 +13,11 @@ function optionChanged(updatedSample) {
 function renderMeta(updatedSample) {
   d3.json(url).then((data) => {
     var meta = data.metadata;
-    console.log(meta);
+    //console.log(meta);
     var filteredMeta = meta.filter(i => i.id == updatedSample);
-    console.log(filteredMeta);
+    //console.log(filteredMeta);
     var chosenMeta = filteredMeta[0];
-    console.log(chosenMeta);
+    //console.log(chosenMeta);
     var output = d3.select("#sample-metadata");
     output.html("");
     Object.entries(chosenMeta).forEach(([key, value]) => {
