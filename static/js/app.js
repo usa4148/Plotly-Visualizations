@@ -4,6 +4,16 @@ function optionChanged(updatedSample) {
   renderChart(updatedSample);
 }
 
+function renderMetadata(updatedSample) {
+  d3.json(url).then((data) => {
+    var meta = data.metadata;
+    var filteredMeta = meta.filter(i => i.id == updatedSample);
+    var chosenMeta = filteredMeta[0];
+    var databox = d3.select("#sample-metadata");
+    
+  });
+}
+
 function renderChart(updatedSample) {
   // Pull samples data out of sample.json
   // Filter for our option
