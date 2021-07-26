@@ -9,13 +9,18 @@ function renderChart(updatedSample) {
   // Filter for our option
   d3.json(url).then((data) => {
     var setts = data.samples;
+    console.log(setts);
     var filteredSets = setts.filter(i => (i.id == updatedSample));
+    console.log(filteredSets);
     var chosenOne = filteredSets[0];
+    console.log(filteredSets[0]);
     var xvalues = chosenOne.sample_values;
+    console.log(xvalues);
     var yvalues = chosenOne.otu_ids;
+    console.log(yvalues);
     var otulabels = chosenOne.otu_labels; 
-      
-  }
+    console.log(otulabels);   
+  });
 
   xvalues = xvalues.slice(0,10);
   yvalues = yvalues.slice(0,10);
@@ -27,7 +32,7 @@ function renderChart(updatedSample) {
     text: label,
     type: "bar",
     orientation: "h"
-  }
+  };
 
   // data
 
@@ -42,7 +47,7 @@ function renderChart(updatedSample) {
       t: 100,
       b: 100
     }
-  }
+  };
 
   // Render the plot to the div tag with id "bar"
   Plotly.newPlot("bar", chartData, layout);

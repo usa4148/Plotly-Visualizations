@@ -14,16 +14,16 @@ function renderChart(updatedSample) {
     console.log(filteredSets);
     var chosenOne = filteredSets[0];
     console.log(filteredSets[0]);
-    var xvalues = chosenOne.sample_values;
-    console.log(xvalues);
-    var yvalues = chosenOne.otu_ids;
-    console.log(yvalues);
+    var xdata= chosenOne.sample_values;
+    console.log(xdata);
+    var ydata = chosenOne.otu_ids;
+    console.log(ydata);
     var otulabels = chosenOne.otu_labels; 
     console.log(otulabels);   
-  });
+ // });
 
-  xvalues = xvalues.slice(0,10);
-  yvalues = yvalues.slice(0,10);
+  xdata= xdata.slice(0,10);
+  ydata= ydata.slice(0,10);
   otulabels = otulabels.slice(0,10);	  
 
   var trace1 = {
@@ -51,7 +51,7 @@ function renderChart(updatedSample) {
 
   // Render the plot to the div tag with id "bar"
   Plotly.newPlot("bar", chartData, layout);
-
+  });
 }
 
 function init() {
