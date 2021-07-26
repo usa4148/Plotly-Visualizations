@@ -42,7 +42,11 @@ function renderChart(updatedSample) {
     console.log(ydata);
     var otulabels = chosenOne.otu_labels; 
     console.log(otulabels);   
- // });
+
+
+ //
+ //  First the Bar Chart
+ //
 
   xdata= xdata.slice(0,10).reverse();
   ydata= ydata.slice(0,10).reverse();         // These numbers need
@@ -58,15 +62,13 @@ function renderChart(updatedSample) {
     marker: {color: "chartreuse"}
   };
 
-  // data
-
   var chartData = [trace1];
 
   // Apply the group bar mode to the layout
   var layout = { 
     title: "Top 10 Bacteria Cultures Found",
     margin: {
-      l: 100,
+      l: 100,   
       r: 100,
       t: 100,
       b: 100
@@ -75,6 +77,21 @@ function renderChart(updatedSample) {
 
   // Render the plot to the div tag with id "bar"
   Plotly.newPlot("bar", chartData, layout);
+
+
+  //
+  // The Bubble Chart
+  // 
+  var bubbleData = {
+
+  }
+
+  var bubbleLayout = {
+
+  }
+
+
+  Plotly.newPlot("bubble", bubbleData, bubbleLayout);
   });
 }
 
