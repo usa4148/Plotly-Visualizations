@@ -82,14 +82,25 @@ function renderChart(updatedSample) {
   //
   // The Bubble Chart
   // 
-  var bubbleData = {
+  var trace2 = {
+     x: ydata,
+     y: xdata,
+     text: otulabels,
+     mode: 'markers',
+     marker: {
+       size: xdata,
+       color: ydata,
+     }
+  };
 
-  }
+  var bubbleData = [trace2];
 
   var bubbleLayout = {
-
-  }
-
+    title: 'Bacteria Cultures Per Sample',
+    showlegend: false,
+    height: 600,
+    width: 800
+  };
 
   Plotly.newPlot("bubble", bubbleData, bubbleLayout);
   });
@@ -115,11 +126,7 @@ function init() {
     renderChart(defaultSample);
     renderMeta(defaultSample);
   });
-
-  
-
-
-
 }
-init();
+
+init();  // Start the page by rendering the default selection
 
