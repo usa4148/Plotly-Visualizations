@@ -44,13 +44,14 @@ function renderChart(updatedSample) {
     console.log(otulabels);   
  // });
 
-  xdata= xdata.slice(0,10);
-  ydata= ydata.slice(0,10);
-  otulabels = otulabels.slice(0,10);	  
+  xdata= xdata.slice(0,10).reverse();
+  ydata= ydata.slice(0,10).reverse();         // These numbers need
+  var text = ydata.toString();                 // to be rendered as text
+  otulabels = otulabels.slice(0,10).reverse();	  
 
   var trace1 = {
     x: xdata,
-    y: ydata,
+    y: text,
     text: otulabels,
     type: "bar",
     orientation: "h"
