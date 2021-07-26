@@ -4,12 +4,16 @@ function optionChanged(updatedSample) {
   renderChart(updatedSample);
 }
 
-function renderMetadata(updatedSample) {
+function renderMeta(updatedSample) {
   d3.json(url).then((data) => {
     var meta = data.metadata;
+    console.log(meta);
     var filteredMeta = meta.filter(i => i.id == updatedSample);
+    console.log(filteredMeta);
     var chosenMeta = filteredMeta[0];
+    console.log(chosenMeta);
     var databox = d3.select("#sample-metadata");
+	 
     
   });
 }
@@ -82,7 +86,7 @@ function init() {
     console.log(defaultSample)
 
     renderChart(defaultSample);
-
+    renderMeta(defaultSample;
   });
 
   

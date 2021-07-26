@@ -7,9 +7,13 @@ function optionChanged(updatedSample) {
 function renderMetadata(updatedSample) {
   d3.json(url).then((data) => {
     var meta = data.metadata;
-    var filteredMeta = meta.filter(i => i.id == updatedSample));
+    console.log(meta);
+    var filteredMeta = meta.filter(i => i.id == updatedSample);
+    console.log(filteredMeta);
     var chosenMeta = filteredMeta[0];
+    console.log(chosenMeta);
     var databox = d3.select("#sample-metadata");
+	 
     
   });
 }
