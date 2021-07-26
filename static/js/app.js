@@ -1,3 +1,8 @@
+//
+// Plotly Visualizations
+// DS Bootcamp
+// Dan C   7/26/2021
+//
 const url = "data/samples.json";
 
 function optionChanged(updatedSample) {
