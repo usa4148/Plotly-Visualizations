@@ -60,10 +60,10 @@ function renderChart(updatedSample) {
   var layout = { 
     title: "Top 10 Bacteria Cultures Found",
     margin: {
-      l: 100,   
+      l: 150,   
       r: 100,
-      t: 100,
-      b: 100
+      t: 25,
+      b: 80
     }
   };
 
@@ -82,9 +82,7 @@ function init() {
     samples.forEach((sample) => {
       dropdown.append("option").text(sample).property("value",sample);
     });
-
     var defaultSample = samples[0];
-
     renderChart(defaultSample);
     renderMeta(defaultSample);
     renderBChart(defaultSample);
