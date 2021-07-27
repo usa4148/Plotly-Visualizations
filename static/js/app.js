@@ -12,12 +12,9 @@ function optionChanged(updatedSample) {
 
 function renderMeta(updatedSample) {
   d3.json(url).then((data) => {
-    var meta = data.metadata;
-    //console.log(meta);
+    var meta = data.metadata;   
     var filteredMeta = meta.filter(i => i.id == updatedSample);
-    //console.log(filteredMeta);
     var chosenMeta = filteredMeta[0];
-    //console.log(chosenMeta);
     var output = d3.select("#sample-metadata");
     output.html("");
     Object.entries(chosenMeta).forEach(([key, value]) => {
@@ -30,19 +27,15 @@ function renderChart(updatedSample) {
   // Pull samples data out of sample.json
   // Filter for our option
   d3.json(url).then((data) => {
-    var setts = data.samples;
-    console.log(setts);
-    var filteredSets = setts.filter(i => (i.id == updatedSample));
-    console.log(filteredSets);
-    var chosenOne = filteredSets[0];
-    console.log(filteredSets[0]);
+    var setts = data.samples;   
+    var filteredSets = setts.filter(i => i.id == updatedSample);   
+    var chosenOne = filteredSets[0];   
     var xdata= chosenOne.sample_values;
-    console.log(xdata);
+    var bubbleydata = xdata;   
     var ydata = chosenOne.otu_ids;
-    console.log(ydata);
+    var bubblexdata = ydata;
     var otulabels = chosenOne.otu_labels; 
-    console.log(otulabels);   
-
+    
 
  //
  //  First the Bar Chart
@@ -50,12 +43,12 @@ function renderChart(updatedSample) {
 
   xdata= xdata.slice(0,10).reverse();
   ydata= ydata.slice(0,10).reverse();         // These numbers need
-  var text = ydata.toString();                 // to be rendered as text
+  var ytext = ydata.toString();                 // to be rendered as text
   otulabels = otulabels.slice(0,10).reverse();	  
 
   var trace1 = {
     x: xdata,
-    y: text,
+    y: ytext,
     text: otulabels,
     type: "bar",
     orientation: "h",
@@ -83,8 +76,8 @@ function renderChart(updatedSample) {
   // The Bubble Chart
   // 
   var trace2 = {
-     x: ydata,
-     y: xdata,
+     x: bubblexdata, //ydata,
+     y: bubbleydata, //xdata,
      text: otulabels,
      mode: 'markers',
      marker: {
@@ -98,6 +91,9 @@ function renderChart(updatedSample) {
   var bubbleLayout = {
     title: 'Bacteria Cultures Per Sample',
     showlegend: false,
+    xaxis: {
+      title: 'OTU ID'
+    },
     height: 600,
     width: 1000
   };
@@ -109,19 +105,15 @@ function renderChart(updatedSample) {
 function init() {
 
   var dropdown = d3.select("#selDataset");
-// Fetch the JSON data and build table //console log it
-//function dataTable(dataTable) {
+  // Fetch the JSON data and build table //console log it
+  //function dataTable(dataTable) {
   d3.json(url).then((data) => {
     var samples = data.names;
     samples.forEach((sample) => {
       dropdown.append("option").text(sample).property("value",sample);
     });
-    console.log(data);
-    //return data;
-
 
     var defaultSample = samples[0];
-    console.log(defaultSample)
 
     renderChart(defaultSample);
     renderMeta(defaultSample);
@@ -130,3 +122,9 @@ function init() {
 
 init();  // Start the page by rendering the default selection
 
+//
+// nb - I am not a fan of js.  While I get the object traversal.
+//      It took me all weekend to get my head around the arrow bit.
+//      And like anything with more use and prodding, it would become 
+//      familiar - I don't find it natural in the least bit.
+//
