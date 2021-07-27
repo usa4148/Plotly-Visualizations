@@ -8,6 +8,7 @@ const url = "data/samples.json";
 function optionChanged(updatedSample) {
   renderChart(updatedSample);
   renderMeta(updatedSample);
+  renderBChart(updatedSample);
 }
 
 function renderMeta(updatedSample) {
@@ -18,7 +19,7 @@ function renderMeta(updatedSample) {
     var output = d3.select("#sample-metadata");
     output.html("");
     Object.entries(chosenMeta).forEach(([key, value]) => {
-      output.append("li").text(`${key}: ${value}`);
+      output.append("h6").text(`${key}: ${value}`);
     });
   });
 }
@@ -31,20 +32,18 @@ function renderChart(updatedSample) {
     var filteredSets = setts.filter(i => i.id == updatedSample);   
     var chosenOne = filteredSets[0];   
     var xdata= chosenOne.sample_values;
-    var bubbleydata = xdata;   
     var ydata = chosenOne.otu_ids;
-    var bubblexdata = ydata;
-    var otulabels = chosenOne.otu_labels; 
-    
+    var otulabels =  chosenOne.otu_labels;
 
  //
  //  First the Bar Chart
  //
 
-  xdata= xdata.slice(0,10).reverse();
-  ydata= ydata.slice(0,10).reverse();         // These numbers need
+  xdata= xdata.slice(0,10).reverse();           // Reverse the data for the upside down chart
+  ydata= ydata.slice(0,10).reverse();           // These numbers need
   var ytext = ydata.toString();                 // to be rendered as text
-  otulabels = otulabels.slice(0,10).reverse();	  
+  otulabels = otulabels.slice(0,10).reverse();	
+  console.log('OTU Labels',otulabels) 
 
   var trace1 = {
     x: xdata,
@@ -70,19 +69,51 @@ function renderChart(updatedSample) {
 
   // Render the plot to the div tag with id "bar"
   Plotly.newPlot("bar", chartData, layout);
+  });
+}
+
+function init() {
+
+  var dropdown = d3.select("#selDataset");
+  // Fetch the JSON data and build table //console log it
+  //function dataTable(dataTable) {
+  d3.json(url).then((data) => {
+    var samples = data.names;
+    samples.forEach((sample) => {
+      dropdown.append("option").text(sample).property("value",sample);
+    });
+
+    var defaultSample = samples[0];
+
+    renderChart(defaultSample);
+    renderMeta(defaultSample);
+    renderBChart(defaultSample);
+  });
+}
 
 
+function renderBChart(updatedSample) {
+  // Pull samples data out of sample.json
+  // Filter for our option
+  d3.json(url).then((data) => {
+    var setts = data.samples;   
+    var filteredSets = setts.filter(i => i.id == updatedSample);   
+    var chosenOne = filteredSets[0];   
+    var bubbleydata = chosenOne.sample_values;   
+    var bubblexdata = chosenOne.otu_ids;
+    var bubblelables = chosenOne.otu_labels;
+    
   //
   // The Bubble Chart
   // 
   var trace2 = {
-     x: bubblexdata, //ydata,
-     y: bubbleydata, //xdata,
-     text: otulabels,
+     x: bubblexdata, 
+     y: bubbleydata, 
+     text: bubblelables,
      mode: 'markers',
      marker: {
-       size: xdata,
-       color: ydata,
+       size: bubbleydata,   
+       color: bubblexdata,  
      }
   };
 
@@ -102,29 +133,6 @@ function renderChart(updatedSample) {
   });
 }
 
-function init() {
-
-  var dropdown = d3.select("#selDataset");
-  // Fetch the JSON data and build table //console log it
-  //function dataTable(dataTable) {
-  d3.json(url).then((data) => {
-    var samples = data.names;
-    samples.forEach((sample) => {
-      dropdown.append("option").text(sample).property("value",sample);
-    });
-
-    var defaultSample = samples[0];
-
-    renderChart(defaultSample);
-    renderMeta(defaultSample);
-  });
-}
-
 init();  // Start the page by rendering the default selection
 
-//
-// nb - I am not a fan of js.  While I get the object traversal.
-//      It took me all weekend to get my head around the arrow bit.
-//      And like anything with more use and prodding, it would become 
-//      familiar - I don't find it natural in the least bit.
 //
