@@ -99,7 +99,7 @@ function renderChart(updatedSample) {
     title: 'Bacteria Cultures Per Sample',
     showlegend: false,
     height: 600,
-    width: 800
+    width: 1000
   };
 
   Plotly.newPlot("bubble", bubbleData, bubbleLayout);
