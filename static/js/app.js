@@ -51,7 +51,7 @@ function renderChart(updatedSample) {
     text: otulabels,
     type: "bar",
     orientation: "h",
-    marker: {color: "chartreuse"}
+    marker: {color: "purple"}
   };
 
   var chartData = [trace1];
